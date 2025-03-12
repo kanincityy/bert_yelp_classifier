@@ -1,6 +1,5 @@
 import torch
 from torch.utils.data import Dataset
-from transformers import AutoTokenizer
 
 class BertYelpDataset(Dataset):
     def __init__(self, data, tokenizer, max_length=512):
