@@ -2,12 +2,10 @@ import torch
 from torch.utils.data import DataLoader
 from transformers import AutoTokenizer
 from load_data import load_yelp_data
-import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), 'src')))
-from yelp_trainer import Trainer
-from model import BertYelpModel
-from bert_yelp_dataset import BertYelpDataset
+from .dataset import BertYelpDataset
+from .yelp_trainer import Trainer
+from .model import BertYelpModel
+
 
 # Load data
 train_data, test_data = load_yelp_data()
