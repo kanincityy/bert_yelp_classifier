@@ -1,103 +1,88 @@
-# BERT Fine-Tuning for Yelp Reviews Sentiment Analysis
-This repository contains code for fine-tuning a pre-trained BERT model to perform sentiment analysis on the Yelp Reviews Full dataset.
+# BERT Fine-Tuning for Yelp Reviews Sentiment Analysis (PyTorch & Hugging Face)
 
-## Overview
-This project demonstrates how to:
+This repository demonstrates fine-tuning a pre-trained BERT model (`bert-base-uncased`) using PyTorch and Hugging Face libraries (`transformers`, `datasets`) for sentiment analysis on the **Yelp Reviews Full dataset**. The goal is to classify reviews based on their star ratings.
 
-* Load and preprocess the Yelp Reviews Full dataset using the Hugging Face `datasets` library.
-* Fine-tune a pre-trained BERT model (`bert-base-uncased`) for sequence classification using PyTorch and the `transformers` library.
-* Implement a custom `Dataset` class for efficient data loading and batching.
-* Create a `Trainer` class for streamlined training and evaluation.
-* Implement checkpoint saving and loading for robust training.
+---
 
-## Requirements
+### ✨ Key Features & What This Project Demonstrates
 
-* Python 3.7+
-* PyTorch
-* Transformers (`transformers`)
-* Datasets (`datasets`)
-* Tqdm
+*   **End-to-End Fine-Tuning Pipeline:** Complete workflow from data loading to model evaluation.
+*   **Hugging Face Integration:** Leverages `datasets` for easy data access and `transformers` for pre-trained models and tokenizers.
+*   **Custom PyTorch Implementation:** Includes a custom `BertYelpDataset` (`dataset.py`) for optimised data handling and a bespoke `BertYelpModel` (`model.py`) adapting BERT for sequence classification.
+*   **Structured Training:** Utilises a `Trainer` class (`trainer.py`) to manage the training loop, validation, optimization, and checkpointing.
+*   **Checkpointing:** Implements saving and loading of model checkpoints for robust training and resuming capabilities.
 
-You can install the required packages using pip:
+### 🛠️ Technologies Used
 
-```bash
-pip install torch transformers datasets tqdm
-```
+*   Python 3.7+
+*   PyTorch
+*   Hugging Face `transformers`
+*   Hugging Face `datasets`
+*   Tqdm (for progress bars)
 
-## Dataset
-
-The project uses the Yelp Reviews Full dataset from the Hugging Face Datasets library. This dataset contains full reviews and star ratings from Yelp.
-
-## Files
-
-* `main.py`: The main script for training and evaluating the model.
-* `dataset.py`: Contains the custom `BertYelpDataset` class.
-* `model.py`: Contains the `BertYelpModel` class.
-* `trainer.py`: Contains the `Trainer` class for training and evaluation.
-* `checkpoints/`: (Directory) Contains saved model checkpoints.
-* `bert_yelp_model.pth`: The final trained model.
-* `requirements.txt`: All necessary imports to make running the code easier :)
-* `README.md`: This file.
-
-## Usage
+### ⚙️ Setup & Installation
 
 1.  **Clone the repository:**
-
-     ```bash
+    ```bash
     git clone [your-repo-url]
     cd [your-repo-directory]
     ```
-
-2.  **Install the requirements:**
-
-     ```bash
+2.  **Install requirements:**
+    ```bash
     pip install torch transformers datasets tqdm
-     ```
+    # Or install from the requirements file:
+    # pip install -r requirements.txt
+    ```
 
-3.  **Run the main script:**
+### ▶️ Usage
 
-     ```bash
-     python src/main.py
-     ```
+Run the main training script:
 
-#     This will:
+```bash
+python main.py
+```
 
-     * Download the Yelp Reviews Full dataset.
-     * Load the `bert-base-uncased` tokenizer and model.
-     * Create `DataLoader` instances.
-     * Fine-tune the model for 3 epochs (default).
-     * Evaluate the model on the test set.
-     * Save the trained model to `bert_yelp_model.pth`.
-     * Save checkpoints to the `checkpoints` folder.
+This script will perform the following steps:
 
- 4.  **To resume training from a checkpoint:**
+1.  Download and preprocess the Yelp Reviews Full dataset.
+2.  Load the `bert-base-uncased` tokenizer and the custom `BertYelpModel`.
+3.  Set up DataLoaders using the custom `BertYelpDataset`.
+4.  Instantiate the `Trainer`.
+5.  Fine-tune the model for a set number of epochs (default: 3).
+6.  Save model checkpoints periodically to the `checkpoints/` directory.
+7.  Evaluate the final model on the test set and print the accuracy.
+8.  Save the final trained model weights to `bert_yelp_model.pth`.
 
-     Modify `main.py` to load the checkpoint using the `trainer.load_checkpoint()` method.
+**Resuming Training:**
+To resume from a saved checkpoint, modify `main.py` to call `trainer.load_checkpoint('path/to/your/checkpoint.pth')` before starting the training loop.
 
- ## Training Parameters
+### 🎛️ Configuration
 
- You can modify the following parameters in `main.py`:
+Key training parameters can be adjusted within `main.py`:
 
- * `epochs`: The number of training epochs.
- * `batch_size`: The batch size for training and evaluation.
- * `learning_rate`: The learning rate for the AdamW optimizer.
- * `checkpoint_interval`: how many epochs to save checkpoints.
+*   `epochs`: Number of training epochs.
+*   `batch_size`: Batch size for training and evaluation.
+*   `learning_rate`: Learning rate for the AdamW optimizer.
+*   `checkpoint_interval`: Frequency (in epochs) for saving checkpoints.
 
- ## Model Evaluation
+### 📁 Project Structure
 
- After training, the script will print the evaluation accuracy on the test set. The trained model is saved to `bert_yelp_model.pth`.
+```
+.
+├── checkpoints/        # Directory for saved model checkpoints
+├── dataset.py          # Custom PyTorch Dataset class
+├── model.py            # Custom PyTorch BERT model class
+├── trainer.py          # Training and evaluation logic class
+├── main.py             # Main script to run training & evaluation
+├── requirements.txt    # Project dependencies
+├── bert_yelp_model.pth # Saved final trained model (after running main.py)
+├── LICENSE             # MIT License file
+└── README.md           # This file
+```
 
- ## Checkpoints
+### 📄 License
 
- The `checkpoints` directory will contain saved model checkpoints at specified intervals. These checkpoints can be used to resume training or to evaluate the model at different stages of training.
-
- ## Contributing 
-
-This project is a reflection of my learning, but feel free to fork the repository and contribute if you have ideas or improvements!
-
-## License 
-
-This repository is licensed under the MIT License. See the LICENSE file for details.
+This project is licensed under the MIT License. See the `LICENSE` file for details.
 
 ---
 
