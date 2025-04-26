@@ -36,10 +36,10 @@ This repository demonstrates fine-tuning a pre-trained BERT model (`bert-base-un
 
 ### ▶️ Usage
 
-Run the main training script:
+Run the main training script from the **root** directory of the project:
 
 ```bash
-python main.py
+python src/main.py
 ```
 
 This script will perform the following steps:
@@ -69,15 +69,17 @@ Key training parameters can be adjusted within `main.py`:
 
 ```
 .
-├── checkpoints/        # Directory for saved model checkpoints
-├── dataset.py          # Custom PyTorch Dataset class
-├── model.py            # Custom PyTorch BERT model class
-├── trainer.py          # Training and evaluation logic class
-├── main.py             # Main script to run training & evaluation
-├── requirements.txt    # Project dependencies
-├── bert_yelp_model.pth # Saved final trained model (after running main.py)
-├── LICENSE             # MIT License file
-└── README.md           # This file
+├── data/ # Raw data files (if included locally) or data processing scripts
+├── src/ # Source code directory
+│ ├── dataset.py # Custom PyTorch Dataset class
+│ ├── model.py # Custom PyTorch BERT model class
+│ ├── trainer.py # Training and evaluation logic class
+│ └── main.py # Main script to run training & evaluation
+├── checkpoints/ # Directory for saved model checkpoints (created during training)
+├── requirements.txt # Project dependencies
+├── bert_yelp_model.pth # Saved final trained model (output of main.py)
+├── LICENSE # MIT License file
+└── README.md # This file
 ```
 
 ### 📄 License
